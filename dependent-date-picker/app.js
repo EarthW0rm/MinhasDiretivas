@@ -42,12 +42,13 @@ app.directive('ewDatePicker',function() {
             , scope: {
                 ngModel: '='
                 , ngModelPredecessor: '=?'
+                , dayIncrement: '@?'
             }
             ,template: htmlTemplate
             , controller: ['$scope', function($scope) {
-
                 $scope.altInputFormats = ['M!/d!/yyyy', 'd!/M!/yyyy'];
                 $scope.opened = false;
+                $scope.dayIncrement = $scope.dayIncrement || 1;
 
                 $scope.dateOptions = {
                     formatYear: 'yy',
@@ -60,12 +61,21 @@ app.directive('ewDatePicker',function() {
                     $scope.opened = true;
                 };
 
+                $scope.RecalculateBy = function(_newValue) {
+                    if(!$scope.ngModel || $scope.ngModel < _newValue){
+                        var dateValue = Object.assign(_newValue);
+                        if(parseInt($scope.dayIncrement) > 0){
+                            dateValue.setDate(dateValue.getDate() + parseInt($scope.dayIncrement));
+                        }
+
+                        $scope.dateOptions.minDate = dateValue;
+                        $scope.ngModel  = dateValue;
+                    }
+                }
+
                 $scope.$watch('ngModelPredecessor', function(newValue, oldValue){
                     if(newValue && newValue != oldValue){
-                        if(!$scope.ngModel || $scope.ngModel < newValue){
-                            $scope.dateOptions.minDate=newValue;
-                            $scope.ngModel  = newValue;
-                        }
+                        $scope.RecalculateBy(newValue);
                     }
                 });
 
