@@ -32,6 +32,7 @@ app.directive('ewDatePicker',function() {
             restrict: 'E'
             , scope: {
                 ngModel: '='
+                , ngModelPredecessor: '=?'
             }
             ,template: htmlTemplate
             , controller: ['$scope', function($scope) {
@@ -48,8 +49,16 @@ app.directive('ewDatePicker',function() {
             
                 $scope.OpenModal = function() {
                     $scope.opened = true;
-
                 };
+
+                $scope.$watch('ngModelPredecessor', function(newValue, oldValue){
+                    if(newValue && newValue != oldValue){
+                        $scope.dateOptions.minDate=newValue;
+                        if($scope.ngModel && $scope.ngModel < newValue){
+                            $scope.ngModel = newValue;
+                        }
+                    }
+                });
 
             }]
         }
