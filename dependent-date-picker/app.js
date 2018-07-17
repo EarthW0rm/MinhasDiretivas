@@ -1,10 +1,19 @@
 var app = angular.module('dependent-date-picker', ['ui.bootstrap', 'ngAnimate', 'ngSanitize']);
 
-app.controller('HomeController', ['$scope',function ($scope) {
+app.controller('DateRange', ['$scope',function ($scope) {
     $scope.opened = false;
 
     $scope.DataInicial = null;
     $scope.DataFinal = null;
+
+}]);
+
+app.controller('DateRangeTriplo', ['$scope',function ($scope) {
+    $scope.opened = false;
+
+    $scope.PrimeiraData = null;
+    $scope.SegundaData = null;
+    $scope.TerceiraData = null;
 
 }]);
 
@@ -53,9 +62,9 @@ app.directive('ewDatePicker',function() {
 
                 $scope.$watch('ngModelPredecessor', function(newValue, oldValue){
                     if(newValue && newValue != oldValue){
-                        $scope.dateOptions.minDate=newValue;
-                        if($scope.ngModel && $scope.ngModel < newValue){
-                            $scope.ngModel = newValue;
+                        if(!$scope.ngModel || $scope.ngModel < newValue){
+                            $scope.dateOptions.minDate=newValue;
+                            $scope.ngModel  = newValue;
                         }
                     }
                 });

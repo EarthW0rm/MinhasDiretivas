@@ -9,25 +9,46 @@
     <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
 </head>
 <body ng-app="dependent-date-picker">
-    <div class="container" ng-controller="HomeController">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel-heading">Panel heading without title</div>
                 <div class="panel panel-default">
+                    <div class="panel-heading">Exemplo de date range</div>
                     <div class="panel-body">
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Data Início:</label>
-                                        <ew-date-picker ng-model="DataInicial"></ew-date-picker>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Data Fim:</label>
-                                        <ew-date-picker ng-model="DataFinal" ng-model-predecessor="DataInicial"></ew-date-picker>
-                                    </div>
-                                </div>
+                        <div class="row" ng-controller="DateRange">
+                            <div class="col-md-3">
+                                <label>Data Início:</label>
+                                <ew-date-picker ng-model="DataInicial"></ew-date-picker>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Data Fim:</label>
+                                <ew-date-picker ng-model="DataFinal" ng-model-predecessor="DataInicial"></ew-date-picker>
+                            </div>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Exemplo dependencia tripla</div>
+                    <div class="panel-body">
+                        <div class="row" ng-controller="DateRangeTriplo">
+                            <div class="col-md-3">
+                                <label>Primeira data:</label>
+                                <ew-date-picker ng-model="PrimeiraData"></ew-date-picker>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Segunda Data:</label>
+                                <ew-date-picker ng-model="SegundaData" ng-model-predecessor="PrimeiraData"></ew-date-picker>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Terceira Data:</label>
+                                <ew-date-picker ng-model="TerceiraData" ng-model-predecessor="SegundaData"></ew-date-picker>
                             </div>
                         </div>
                     </div>
