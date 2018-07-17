@@ -1,26 +1,20 @@
 var app = angular.module('dependent-date-picker', ['ui.bootstrap', 'ngAnimate', 'ngSanitize']);
 
 app.controller('DateRange', ['$scope',function ($scope) {
-    $scope.opened = false;
-
-    $scope.DataInicial = null;
+    $scope.DataInicial = new Date();
     $scope.DataFinal = null;
-
 }]);
 
 app.controller('DateRangeTriplo', ['$scope',function ($scope) {
-    $scope.opened = false;
-
     $scope.PrimeiraData = null;
-    $scope.SegundaData = null;
+    $scope.SegundaData =  null;
     $scope.TerceiraData = null;
-
 }]);
 
 app.directive('ewDatePicker',function() {
 
     var htmlTemplate = ' \
-        <div class="input-group"> \
+        <div class="input-group" ng-init="Init();"> \
             <input type="text" class="form-control" \
                 uib-datepicker-popup="dd/MM/yyyy" \
                 ng-model="ngModel" \
@@ -62,14 +56,19 @@ app.directive('ewDatePicker',function() {
                 };
 
                 $scope.RecalculateBy = function(_newValue) {
-                    if(!$scope.ngModel || $scope.ngModel < _newValue){
-                        var dateValue = Object.assign(_newValue);
-                        if(parseInt($scope.dayIncrement) > 0){
-                            dateValue.setDate(dateValue.getDate() + parseInt($scope.dayIncrement));
-                        }
-
+                    var dateValue = new Date(_newValue);
+                    if(parseInt($scope.dayIncrement) > 0){
+                        dateValue.setDate(dateValue.getDate() + parseInt($scope.dayIncrement));
+                    }
+                    if(!$scope.ngModel || $scope.ngModel < dateValue) {
                         $scope.dateOptions.minDate = dateValue;
                         $scope.ngModel  = dateValue;
+                    }
+                }
+
+                $scope.Init = function() {
+                    if($scope.ngModelPredecessor){
+                        $scope.RecalculateBy($scope.ngModelPredecessor);
                     }
                 }
 
