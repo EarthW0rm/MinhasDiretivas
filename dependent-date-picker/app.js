@@ -3,14 +3,15 @@ var app = angular.module('dependent-date-picker', ['ui.bootstrap', 'ngAnimate', 
 app.controller('HomeController', ['$scope',function ($scope) {
     $scope.opened = false;
 
-    $scope.DataAtual =  new Date(2018, 7, 20);
+    $scope.DataInicial = null;
+    $scope.DataFinal = null;
 
 }]);
 
 app.directive('ewDatePicker',function() {
 
     var htmlTemplate = ' \
-        <div class="input-group col-md-2"> \
+        <div class="input-group"> \
             <input type="text" class="form-control" \
                 uib-datepicker-popup="dd/MM/yyyy" \
                 ng-model="ngModel" \
@@ -20,9 +21,10 @@ app.directive('ewDatePicker',function() {
                 close-text="Close" \
                 alt-input-formats="altInputFormats" \
                 readonly\
+                ng-click="OpenModal()" \
                 /> \
             <span class="input-group-btn"> \
-                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button> \
+                <button type="button" class="btn btn-default" ng-click="OpenModal()"><i class="glyphicon glyphicon-calendar"></i></button> \
             </span> \
         </div>';
 
@@ -44,7 +46,7 @@ app.directive('ewDatePicker',function() {
                     startingDay: 1
                 };
             
-                $scope.open1 = function() {
+                $scope.OpenModal = function() {
                     $scope.opened = true;
 
                 };
