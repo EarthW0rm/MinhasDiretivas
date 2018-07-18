@@ -55,6 +55,52 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Exemplo de link-click</div>
+                        <div class="panel-body">
+    
+                            <div class="row" ng-controller="DateRange">
+                                <div class="col-md-3">
+                                    <label>Data Início:</label>
+                                    <ew-date-picker ng-model="DataInicial" link-click="link_click"></ew-date-picker>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Data Fim:</label>
+                                    <ew-date-picker ng-model="DataFinal" ng-model-predecessor="DataInicial" link-click="link_click"></ew-date-picker>
+                                </div>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Exemplo dependencia tripla com link-click</div>
+                            <div class="panel-body">
+                                <div class="row" ng-controller="DateRangeTriplo">
+                                    <div class="col-md-3">
+                                        <label>Primeira data:</label>
+                                        <ew-date-picker ng-model="PrimeiraData" link-click="link_click_one"></ew-date-picker>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Segunda Data:</label>
+                                        <ew-date-picker ng-model="SegundaData" ng-model-predecessor="PrimeiraData" day-increment="10"  link-click="link_click_one"></ew-date-picker>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Terceira Data:</label>
+                                        <ew-date-picker ng-model="TerceiraData" ng-model-predecessor="SegundaData" link-click="link_click_one"></ew-date-picker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </div>
     
     

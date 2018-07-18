@@ -23,11 +23,12 @@ app.directive('ewDatePicker',function() {
                 ng-required="true"  \
                 close-text="Close" \
                 alt-input-formats="altInputFormats" \
+                show-button-bar="false" \
                 readonly\
                 ng-click="OpenModal()" \
                 /> \
             <span class="input-group-btn"> \
-                <button type="button" class="btn btn-default" ng-click="OpenModal()"><i class="glyphicon glyphicon-calendar"></i></button> \
+                <button type="button" class="btn btn-default" ng-click="OpenModal(this)"><i class="glyphicon glyphicon-calendar"></i></button> \
             </span> \
         </div>';
 
@@ -37,6 +38,7 @@ app.directive('ewDatePicker',function() {
                 ngModel: '='
                 , ngModelPredecessor: '=?'
                 , dayIncrement: '@?'
+                , linkClick: '=?'
             }
             ,template: htmlTemplate
             , controller: ['$scope', function($scope) {
@@ -49,9 +51,11 @@ app.directive('ewDatePicker',function() {
                     maxDate: new Date(2020, 5, 22),
                     minDate: new Date(),
                     startingDay: 1
+                    , showButtonBar: false
                 };
             
-                $scope.OpenModal = function() {
+                $scope.OpenModal = function(event) {
+                    $scope.linkClick = event ? true : false;
                     $scope.opened = true;
                 };
 
@@ -59,22 +63,33 @@ app.directive('ewDatePicker',function() {
                     var dateValue = new Date(_newValue);
                     if(parseInt($scope.dayIncrement) > 0){
                         dateValue.setDate(dateValue.getDate() + parseInt($scope.dayIncrement));
+                    }                    
+                    if($scope.dateOptions.minDate != dateValue){
+                        $scope.dateOptions.minDate = dateValue;
                     }
                     if(!$scope.ngModel || $scope.ngModel < dateValue) {
-                        $scope.dateOptions.minDate = dateValue;
                         $scope.ngModel  = dateValue;
                     }
                 }
 
                 $scope.Init = function() {
+                    if($scope.linkClickFrom && $scope.linkClickTo) throw new Error("link-click-from e link-click-to nao podem ser definidos no mesmo elemento.");
                     if($scope.ngModelPredecessor){
                         $scope.RecalculateBy($scope.ngModelPredecessor);
                     }
                 }
+                $scope.$watch('ngModel', function(newValue, oldValue){
+                    if(newValue && newValue != oldValue) {
+                        $scope.linkClick = true;
+                    }
+                });
 
                 $scope.$watch('ngModelPredecessor', function(newValue, oldValue){
-                    if(newValue && newValue != oldValue){
+                    if(newValue && newValue != oldValue) {
                         $scope.RecalculateBy(newValue);
+                        if($scope.linkClick && $scope.linkClick != false) {
+                            $scope.OpenModal();
+                        }
                     }
                 });
 
