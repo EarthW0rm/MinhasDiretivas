@@ -14,7 +14,7 @@ app.controller('DateRangeTriplo', ['$scope',function ($scope) {
 app.directive('ewDatePicker',function() {
 
     var htmlTemplate = ' \
-        <div class="input-group" ng-init="Init();"> \
+        <div class="input-group ew-date-picker" ng-init="Init();"> \
             <input type="text" class="form-control" \
                 uib-datepicker-popup="dd/MM/yyyy" \
                 ng-model="ngModel" \
@@ -50,8 +50,8 @@ app.directive('ewDatePicker',function() {
                     formatYear: 'yy',
                     maxDate: new Date(2020, 5, 22),
                     minDate: new Date(),
-                    startingDay: 1
-                    , showButtonBar: false
+                    showButtonBar: false
+                    , showWeeks: false
                 };
             
                 $scope.OpenModal = function(event) {

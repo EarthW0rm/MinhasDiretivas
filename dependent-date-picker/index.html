@@ -7,6 +7,77 @@
     <title>Document</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"  media="screen">
     <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+    <style>
+        button:focus { outline:0 !important; }
+        ul:focus { outline:0 !important; }
+        li:focus { outline:0 !important; }
+        div.ew-date-picker .uib-datepicker-popup.dropdown-menu div:focus { outline:0 !important; }
+        
+        div.ew-date-picker .uib-datepicker-popup.dropdown-menu {
+            background-color: white;
+            padding: 20px 20px 20px 20px;
+        }
+        div.ew-date-picker .uib-datepicker-popup.dropdown-menu li:focus,
+        div.ew-date-picker .uib-datepicker-popup.dropdown-menu ul:focus,
+        div.ew-date-picker .uib-datepicker-popup.dropdown-menu button:focus,
+        div.ew-date-picker .uib-datepicker-popup.dropdown-menu div:focus {
+             outline:0 !important;
+        }
+
+        /*HEADER NAVEGACAO*/
+        div.ew-date-picker thead button.uib-title,
+        div.ew-date-picker thead button.uib-right,
+        div.ew-date-picker thead button.uib-left {
+            border: 0px;
+            padding: 2px 2px 2px 2px;
+        }
+        div.ew-date-picker thead button.uib-title:hover {
+            background-color: white;
+            text-decoration: underline;
+        }
+
+        /*DIAS DO CALENDATIO*/
+        div.ew-date-picker tbody .uib-weeks td.uib-day {
+            padding: 2px 2px 2px 2px;
+        }
+
+        div.ew-date-picker tbody .uib-weeks td.uib-day button.btn-default{
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+            border-radius: 100px;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+        div.ew-date-picker tbody .uib-weeks td.uib-day button.btn-default.active{
+            color: white;
+            background-color: black;
+        }
+        div.ew-date-picker tbody .uib-weeks td.uib-day button.btn-default.active span{
+            color: white;
+        }
+        
+
+        div.ew-date-picker tbody .uib-weeks td.uib-day button[disabled].btn-default{
+            color: #ddd;
+            font-weight: 100;
+        }
+        div.ew-date-picker tbody .uib-weeks td.uib-day button[disabled].btn-default span{
+            color: #ddd !important;
+            font-weight: 100;
+        }
+        div.ew-date-picker tbody .uib-weeks td.uib-day button:hover{
+            background-color: #f6921e;
+            
+        }
+
+
+        div.ew-date-picker tbody .uib-weeks td.uib-day button, .uib-month button, .uib-year button {
+            min-width: 100%;
+            border: 0px;
+        }
+    </style>
 </head>
 <body ng-app="dependent-date-picker">
     <div class="container">
